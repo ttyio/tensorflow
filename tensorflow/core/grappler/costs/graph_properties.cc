@@ -782,6 +782,9 @@ class SymbolicShapeRefiner {
       const GraphView::OutputPort fanin = graph_.GetRegularFanin(port);
       int src_output = fanin.port_id;
       const NodeDef* src = fanin.node;
+      if (!src) {
+          continue;
+      }
       NodeContext* src_ctx = GetNodeContext(src);
       if (src_ctx == nullptr) {
         return errors::FailedPrecondition(
